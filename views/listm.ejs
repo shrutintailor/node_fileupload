@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>list</title>
+  </head>
+
+  <body>
+    <div>
+      <form>
+        <table border="1">
+          
+            <% patharr.forEach((val,index)=>{ console.log(val) //
+            console.log(val.exten) %>
+            <td>
+            <tr>
+              <img src="<%=val.path%>" height="200px" width="200px" alt="no" />
+            </tr>
+            <tr><%= val.exten %></td>
+          </tr>
+          <% }) %>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
