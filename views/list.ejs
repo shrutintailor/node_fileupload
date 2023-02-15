@@ -5,21 +5,17 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-    
-  </head>
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     $('#example').dataTable();
 } );
-
-</script>
+</script> 
+  </head>
 <h1><center>LIST</center></h1><br>
-<!-- &nbsp;&nbsp;&nbsp;&nbsp;<button id ="s" >single</button><br><br> -->
+&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" id="fatchbtn" >single</button><br><br>
 <form action="/fileupload/">
     &nbsp;&nbsp;&nbsp;&nbsp;<button>single</button><br><br>
 </form>
-
-
 <form action="/fileuploadm/">
     &nbsp;&nbsp;&nbsp;&nbsp;<button>Multi</button><br><br>
 </form>
@@ -29,6 +25,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>File Name</th>
                 <th>File</th>
                 <th>Extention</th>
                 <th>Show</th>
@@ -39,6 +36,7 @@
         <tfoot>
             <tr>
                 <th>No</th>
+                <th>File Name</th>
                 <th>File</th>
                 <th>Extention</th>
                 <th>Show</th>
@@ -51,11 +49,12 @@
                 // console.log(val)
                 // console.log(val.exten)
             %> 
-            <tr>    <td><% index + 1 %></td>             
+            <tr>    <td><%= index + 1 %></td>
+                    <td><%= val.path %></td>             
                     <td><img src="<%= val.path %>" height="200px" width="200px" alt="no" /></td>
                     <td><%= val.exten %></td>
                     <td><button ><a href="/list/delete/<%= val.path%>">delete</button></td>
-                    <td><button ><a href="/list/show/<%= val.path%>">Show</button></td>
+                    <td><button ><a target="_blank" href="/list/show/<%= val.path%>">Show</button></td>
                     </tr>
                     <%  return val }) %>
           </tbody>
