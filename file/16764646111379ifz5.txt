@@ -1,0 +1,33 @@
+let arr2 = ['index', 'id','a','s','d','f','g','h','j', 'dexin','exdin','di',"asif","fisa","did","sifa"];
+
+function checkAnagram(str1, str2){
+    let count = 0;
+    if(str2.length != str1.length){
+        return false;
+    }
+    else{
+        str1 = str1.split('');
+        str2 = str2.split('');
+        
+        for(let val of str1){
+            if(!str2.includes(val))
+                return false;
+        }
+        return true;
+    }
+}
+len = arr2.length;
+let anagram = [];
+for(let i = 0;i < len; i++){
+    for(let j = i+1 ; j < len ; j++){
+        console.log(`${arr2[i]} with ${arr2[j]}`)
+        if(checkAnagram(arr2[i], arr2[j])){
+            arr2[j] += "X"; 
+            anagram.push(arr2[i]);
+            break;
+        }
+        console.log('\n');
+    }
+}
+
+console.log(anagram);

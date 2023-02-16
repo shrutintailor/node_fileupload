@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
-// const maxSize = 1024 * 1024 * 50;
+const maxSize = 1024 * 1024 * 50;
 
 // home
 app.get("/", (req, res) => {
@@ -20,10 +20,10 @@ app.get("/", (req, res) => {
 //multi for both normal and ajax 
 
 function randomString() {
-  const characters ='abcdefghijklmnopqrstuvwxyz0123456789';
+  const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
   let str = "";
-  for(let i = 1; i <= 5; i++){
-      str += characters.charAt(Math.floor(Math.random() * characters.length));
+  for (let i = 1; i <= 5; i++) {
+    str += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return str;
 }
@@ -40,7 +40,7 @@ const filem = multer({
     // storage:upload
   }),
   // filesize:
-  // limits: { fileSize: maxSize },
+  limits: { fileSize: maxSize },
 }).array("filem", 10);
 
 
@@ -50,17 +50,17 @@ app.use("/list", express.static(path.join(__dirname, "file")));
 
 const file = multer({
   storage: multer.diskStorage({
-    destination:(req, file, cd) => {
-     cd(null,"./file");
+    destination: (req, file, cd) => {
+      cd(null, "./file");
     },
     filename: (req, file, cd) => {
       cd(null, Date.now() + randomString() + path.extname(file.originalname));
     },
   }),
-  // limits: { fileSize: maxSize },
+  limits: { fileSize: maxSize },
 }).single("file");
 
-app.post("/fileupload1",file, (req, res) => {
+app.post("/fileupload1", file, (req, res) => {
   res.redirect("/list2");
 });
 
@@ -162,17 +162,13 @@ app.get("/list/delete1/", (req, res) => {
 });
 app.get("/list/show1", (req, res) => {
   // 1676450619852multi.jpg
-  let a = path.join("fileupload/file/",`${req.query.name}`);
+  let a = path.join("list/", `${req.query.name}`);
   res.json(a);
 });
 
 app.get("/list2", (reeq, res) => {
   res.render("ajaxlist");
 });
-
-
-
-
 
 app.post("/fileupload2", filem, (req, res) => {
   res.redirect("/list2");
